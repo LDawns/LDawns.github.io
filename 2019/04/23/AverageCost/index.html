@@ -364,13 +364,13 @@
 T(n) = & E[\sum_{i<j} X_{ij}] \\
 = & \sum_{i<j} E[X_{ij}] \\
 = & \sum_{i<j} PR\{Z_{i}与Z_{j}比较的概率\}
-\end{aligned}</script><p>而$Z_{i}与Z_{j}$会不会进行比较需要看算法是如何进行的，在QS中即是看pivot如何选：</p>
+\end{aligned}</script><p>而$Z<em>{i}与Z</em>{j}$会不会进行比较需要看算法是如何进行的，在QS中即是看pivot如何选：</p>
 <ol>
-<li>若pivot选择$[Z_{1},Z_{i})\bigcup(Z_{j},Z_{n}],则对它们比不比较没有影响$</li>
-<li>若pivot选择$Z_{i}和Z_{j}$则它们必会比较</li>
-<li>若pivot选择$(Z_{i}和Z_{j})$则它们必不会比较</li>
+<li>若pivot选择$[Z<em>{1},Z</em>{i})\bigcup(Z<em>{j},Z</em>{n}],则对它们比不比较没有影响$</li>
+<li>若pivot选择$Z<em>{i}和Z</em>{j}$则它们必会比较</li>
+<li>若pivot选择$(Z<em>{i}和Z</em>{j})$则它们必不会比较</li>
 </ol>
-<p>将不影响结果的区间去除，那么$Z_{i}与Z_{j}$进行比较的概率即是$\frac{2}{j-i+1}$<br>于是结果即是：</p>
+<p>将不影响结果的区间去除，那么$Z<em>{i}与Z</em>{j}$进行比较的概率即是$\frac{2}{j-i+1}$<br>于是结果即是：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 \sum_{i<j} \frac{2}{j-i+1}\in \Omicron(nlogn)
@@ -825,7 +825,7 @@ T(n)\in \Theta(1+\alpha)
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

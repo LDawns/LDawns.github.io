@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="LDawn的自闭室">
 <meta property="og:description" content="记录一次从服务器迁移网站到github.io上 服务器与github.io是分开的！服务器与github.io是分开的！服务器与github.io是分开的！所以不用麻烦的换库名字，太草了 所以还得换回来，太草了 这次直接用本机文件夹备份了，太草了 现在发布文章的步骤似乎可以在备份中发布然后12hexo ghexo d 最后去github.io页面中添加custom domain为www.lsmia">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-13T02:15:23.000Z">
+<meta property="og:updated_time" content="2019-08-13T02:59:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网站迁移工作的教训">
 <meta name="twitter:description" content="记录一次从服务器迁移网站到github.io上 服务器与github.io是分开的！服务器与github.io是分开的！服务器与github.io是分开的！所以不用麻烦的换库名字，太草了 所以还得换回来，太草了 这次直接用本机文件夹备份了，太草了 现在发布文章的步骤似乎可以在备份中发布然后12hexo ghexo d 最后去github.io页面中添加custom domain为www.lsmia">
@@ -366,7 +366,9 @@
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ rm blogs/themes/next/.git</span><br><span class="line">$ git rm --cached blogs/themes/next</span><br><span class="line">$ git add blogs/themes/next<span class="comment">/*</span></span><br></pre></td></tr></table></figure>
 <p>原理就是要先删除其与原up的联系，再建立其对自己的联系</p>
 <h1 id="npm-需要重新安装"><a href="#npm-需要重新安装" class="headerlink" title="npm 需要重新安装"></a>npm 需要重新安装</h1><p>切换到博客文件夹内，执行以下指令</p>
-<p>‘’’<br>npm install<br>npm install hexo-deployer-git —save<br>npm i hexo-renderer-pandoc —save<br>‘’’</p>
+<p>‘’’<br>npm install<br>npm install hexo-deployer-git —save<br>npm i hexo-renderer-kramed —save<br>‘’’</p>
+<p>注意：渲染数学公式的选项cdn要变为cdn: //cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML</p>
+<p>（终于破案了）</p>
 <p>还有最好把live2D卸一遍，要不然会出现两个老婆，<del>不也挺好的嘛</del></p>
 <h1 id="根目录发生改变"><a href="#根目录发生改变" class="headerlink" title="根目录发生改变"></a>根目录发生改变</h1><p>修改了_config.yml <code>root</code>从<code>/blog/</code> 改为了 <code>/</code></p>
 <p><code>url</code> 也发生了相应的改变</p>
@@ -739,7 +741,7 @@
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -792,26 +794,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
