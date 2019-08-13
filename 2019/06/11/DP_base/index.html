@@ -433,7 +433,7 @@ max(r[i-1,j],r[i,j-1]),\quad x[i]!=y[j]
 <li>输入：$x[1…n]$</li>
 <li>定义子问题：$r[i,j]$表示以x[i]开始，以x[j]结尾的最长连续子序列，只要带上<code>连续</code>就是这个板子</li>
 <li>目标：求所有$r[i,j]$的最大值</li>
-<li>初始化：$r[i,i+1]=I\left{x[i]==x[i+1]\right},r[i,i]=0$</li>
+<li>初始化：$r[i,i+1]=I\left\{x[i]==x[i+1]\right\},r[i,i]=0$</li>
 <li>递归式：<script type="math/tex; mode=display">
 r[i,j]=\begin{cases}
 r[i+1,j-1] + 1,\quad x[i]=x[j]  \\\\
