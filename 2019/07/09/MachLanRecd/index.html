@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,推荐算法,花旗杯,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="之前完全没有接触过机器学习的内容，要两个月速成的话肯定是不可能从数学原理一步一步推的，先调库，原理之后我们再补回来。 起步模型没定，啥都莫得，等金工那边定模型，我们赶紧速成一下，感谢github上的大哥们，仿照他们写了一些，我感觉我又行了，感觉也不过如此，调个库就完事，后面证明我错了。 于是安了sklearn库，一开始的代码就长下面这个样子12345678910111213# 算法模型from s">
+<meta name="keywords" content="机器学习,推荐算法,花旗杯">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习实战------项目开发经过">
+<meta property="og:url" content="http://www.lsmian.com/2019/07/09/MachLanRecd/index.html">
+<meta property="og:site_name" content="LDawn的自闭室">
+<meta property="og:description" content="之前完全没有接触过机器学习的内容，要两个月速成的话肯定是不可能从数学原理一步一步推的，先调库，原理之后我们再补回来。 起步模型没定，啥都莫得，等金工那边定模型，我们赶紧速成一下，感谢github上的大哥们，仿照他们写了一些，我感觉我又行了，感觉也不过如此，调个库就完事，后面证明我错了。 于是安了sklearn库，一开始的代码就长下面这个样子12345678910111213# 算法模型from s">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/LDawns/reward/master/dataPtt.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/LDawns/reward/master/Suprise.png">
+<meta property="og:updated_time" content="2019-09-09T04:31:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习实战------项目开发经过">
+<meta name="twitter:description" content="之前完全没有接触过机器学习的内容，要两个月速成的话肯定是不可能从数学原理一步一步推的，先调库，原理之后我们再补回来。 起步模型没定，啥都莫得，等金工那边定模型，我们赶紧速成一下，感谢github上的大哥们，仿照他们写了一些，我感觉我又行了，感觉也不过如此，调个库就完事，后面证明我错了。 于是安了sklearn库，一开始的代码就长下面这个样子12345678910111213# 算法模型from s">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/LDawns/reward/master/dataPtt.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.lsmian.com/2019/07/09/MachLanRecd/">
+
+
+
+
+
+  <title>机器学习实战------项目开发经过 | LDawn的自闭室</title>
+  
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+<script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LDawn的自闭室</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一条不出货的小咸鱼</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.lsmian.com/2019/07/09/MachLanRecd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LDawn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LDawn的自闭室">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习实战------项目开发经过</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-09T00:00:00+08:00">
+                2019-07-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前完全没有接触过机器学习的内容，要两个月速成的话肯定是不可能从数学原理一步一步推的，先调库，原理之后我们再补回来。</p>
+<h1 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h1><p>模型没定，啥都莫得，等金工那边定模型，我们赶紧速成一下，感谢<code>github</code>上的大哥们，仿照他们写了一些，<del>我感觉我又行了</del>，感觉也不过如此，调个库就完事，后面证明我错了。</p>
+<p>于是安了sklearn库，一开始的代码就长下面这个样子<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 算法模型</span></span><br><span class="line"><span class="keyword">from</span> sklearn.xxxModel <span class="keyword">import</span> xxxAlg</span><br><span class="line"><span class="comment"># 划分训练集与测试集</span></span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">Frame = pd.read_csv(<span class="string">"data.csv"</span>,encoding=<span class="string">"xxx"</span>)</span><br><span class="line"><span class="comment"># 划分训练集与测试集</span></span><br><span class="line">trainData,testData = train_test_split(Frame,<span class="number">0.25</span>)</span><br><span class="line">model = xxxAlg()</span><br><span class="line"><span class="comment"># 训练模型，这里一般可以调参</span></span><br><span class="line">model.fit(trainData)</span><br><span class="line">predict = model.predict(testData)</span><br></pre></td></tr></table></figure></p>
+<h1 id="没有数据集？凭空学，学TMD"><a href="#没有数据集？凭空学，学TMD" class="headerlink" title="没有数据集？凭空学，学TMD"></a>没有数据集？凭空学，学TMD</h1><p>一开始金工的同学信誓旦旦的告诉我们，数据集会有的，然鹅他们的数据集只有可怜的50条数据…</p>
+<p>学毛啊！</p>
+<p>还拖了一个月才知道这个噩耗，我当机立断的就告诉大家，<del>有条件要上，没有条件创造条件也要上</del>，然后以迅雷不及掩耳盗铃儿响叮当之势<code>写</code>了一个数据集，想要多少数据量就有多少！</p>
+<p>???数据集为啥还能写的</p>
+<p>按照某一篇论文的比例，和一定的松紧度随机了各位用户及其行为…</p>
+<p>MD,我也很绝望啊</p>
+<p><img src="https://raw.githubusercontent.com/LDawns/reward/master/dataPtt.png" alt="avatar"></p>
+<p>顺带一提，基金代码和属性是从网上爬的<del>这是真的，不是随的</del></p>
+<p>爬基金的代码如下：</p>
+<p><del>woc被我删了</del>，给大家一个网址吧，剩下的自行体会：<br><a href="http://fund.eastmoney.com/js/fundcode_search.js" target="_blank" rel="noopener">http://fund.eastmoney.com/js/fundcode_search.js</a></p>
+<p>生成数据集的代码如下，<del>虽然我并不觉得有人会需要这个</del></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="comment"># 分权随机函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">WeightRand</span><span class="params">(weightlist)</span>:</span></span><br><span class="line">    weight = random.randint(<span class="number">1</span>,<span class="number">100</span>)</span><br><span class="line">    length = len(weightlist)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(length):</span><br><span class="line">        <span class="keyword">if</span> weight &lt;= weightlist[i]:</span><br><span class="line">            <span class="keyword">return</span> i</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取基金列表</span></span><br><span class="line">RawFrame = pd.read_csv(<span class="string">'旧基金2.0.csv'</span>,dtype=str,encoding=<span class="string">'gbk'</span>)[[<span class="string">'基金编号(此值唯一)'</span>,<span class="string">'类型'</span>]]</span><br><span class="line">RawFrame = RawFrame.dropna(axis=<span class="number">0</span>, how=<span class="string">"all"</span>)</span><br><span class="line">BondFrame = RawFrame.ix[RawFrame.类型 == <span class="string">"债券型"</span>]</span><br><span class="line">CurrFrame = RawFrame.ix[RawFrame.类型 == <span class="string">"货币型"</span>]</span><br><span class="line">AllocFrame = RawFrame.ix[RawFrame.类型 == <span class="string">"混合型"</span>]</span><br><span class="line">StockFrame = RawFrame.ix[RawFrame.类型 == <span class="string">"股票型"</span>]</span><br><span class="line"></span><br><span class="line">UserNum = <span class="number">2000</span></span><br><span class="line"><span class="comment"># 年龄</span></span><br><span class="line">AgeStartList = [<span class="number">40</span>,<span class="number">40</span>,<span class="number">40</span>,<span class="number">40</span>,<span class="number">40</span>]</span><br><span class="line">AgeEndList = [<span class="number">44</span>,<span class="number">43</span>,<span class="number">46</span>,<span class="number">60</span>,<span class="number">50</span>]</span><br><span class="line"><span class="comment"># 性别</span></span><br><span class="line">SexWeightList = [<span class="number">61</span>,<span class="number">68</span>,<span class="number">64</span>,<span class="number">60</span>,<span class="number">61</span>]</span><br><span class="line"><span class="comment"># 持有余额</span></span><br><span class="line">RemainStartList = [<span class="number">40000</span>,<span class="number">40000</span>,<span class="number">80000</span>,<span class="number">140000</span>,<span class="number">70000</span>]</span><br><span class="line">RemainEndList = [<span class="number">60000</span>,<span class="number">60000</span>,<span class="number">100000</span>,<span class="number">160000</span>,<span class="number">90000</span>]</span><br><span class="line"><span class="comment"># 消费者类型</span></span><br><span class="line">TypeWeightList = [<span class="number">56</span>,<span class="number">28</span>,<span class="number">13</span>,<span class="number">2</span>,<span class="number">1</span>]</span><br><span class="line"><span class="comment"># 开户时长</span></span><br><span class="line">RegisterStartList = [<span class="number">23</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">8</span>,<span class="number">25</span>]</span><br><span class="line">RegisterEndList = [<span class="number">27</span>,<span class="number">35</span>,<span class="number">35</span>,<span class="number">12</span>,<span class="number">29</span>]</span><br><span class="line"><span class="comment"># 投资额度</span></span><br><span class="line">InvestStartList = [<span class="number">2500</span>,<span class="number">1500</span>,<span class="number">4500</span>,<span class="number">1500</span>,<span class="number">7000</span>]</span><br><span class="line">InvestEndList = [<span class="number">5083</span>,<span class="number">3739</span>,<span class="number">9771</span>,<span class="number">3718</span>,<span class="number">14785</span>]</span><br><span class="line"><span class="comment"># 投资频率</span></span><br><span class="line">FrequencyStartList = [<span class="number">50</span>,<span class="number">30</span>,<span class="number">30</span>,<span class="number">1</span>,<span class="number">18</span>]</span><br><span class="line">FrequencyEndList = [<span class="number">70</span>,<span class="number">50</span>,<span class="number">50</span>,<span class="number">3</span>,<span class="number">22</span>]</span><br><span class="line"><span class="comment"># 手续费</span></span><br><span class="line">ChargeStartList = [<span class="number">600</span>,<span class="number">300</span>,<span class="number">400</span>,<span class="number">900</span>,<span class="number">800</span>]</span><br><span class="line">ChargeEndList = [<span class="number">1200</span>,<span class="number">900</span>,<span class="number">1200</span>,<span class="number">2700</span>,<span class="number">2600</span>]</span><br><span class="line"><span class="comment"># 股票</span></span><br><span class="line">StockWeightList = [<span class="number">95</span>,<span class="number">28</span>,<span class="number">35</span>,<span class="number">2</span>,<span class="number">10</span>]</span><br><span class="line"><span class="comment"># 配置</span></span><br><span class="line">AllocWeightList = [<span class="number">4</span>,<span class="number">69</span>,<span class="number">64</span>,<span class="number">1</span>,<span class="number">7</span>]</span><br><span class="line"><span class="comment"># 债券</span></span><br><span class="line">BondWeightList = [<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">25</span>,<span class="number">100</span>]</span><br><span class="line"><span class="comment"># 货币</span></span><br><span class="line">CurrWeightList = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">0</span>]</span><br><span class="line"><span class="comment"># 四种总和</span></span><br><span class="line">FundWeightList = [StockWeightList,AllocWeightList,BondWeightList,CurrWeightList]</span><br><span class="line"><span class="comment"># 认购</span></span><br><span class="line">RgWeightList = [<span class="number">41</span>,<span class="number">3</span>,<span class="number">92</span>,<span class="number">99</span>,<span class="number">14</span>]</span><br><span class="line"><span class="comment"># 申购</span></span><br><span class="line">SgWeightList = [<span class="number">25</span>,<span class="number">30</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">50</span>]</span><br><span class="line"><span class="comment"># 定投</span></span><br><span class="line">DtWeightList = [<span class="number">22</span>,<span class="number">37</span>,<span class="number">4</span>,<span class="number">0</span>,<span class="number">17</span>]</span><br><span class="line"><span class="comment"># 三种总和</span></span><br><span class="line">WayWeightList = [RgWeightList,SgWeightList,DtWeightList]</span><br><span class="line"><span class="comment"># 两个月不行，有些用户根本没买，换成十八个月！用户数量削减</span></span><br><span class="line">StartDate = (<span class="number">2018</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)             </span><br><span class="line">EndDate = (<span class="number">2019</span>,<span class="number">5</span>,<span class="number">31</span>,<span class="number">23</span>,<span class="number">59</span>,<span class="number">59</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)    </span><br><span class="line"></span><br><span class="line">start=time.mktime(StartDate)    <span class="comment">#生成开始时间戳</span></span><br><span class="line">end=time.mktime(EndDate)        <span class="comment">#生成结束时间戳</span></span><br><span class="line"></span><br><span class="line">StockCodeList = StockFrame[<span class="string">"基金编号(此值唯一)"</span>].to_list()[<span class="number">0</span>:<span class="number">200</span>] <span class="comment"># 选择购买基金显示方式：可以修改name为你选定数据源的任意属性</span></span><br><span class="line">AllocCodeList = AllocFrame[<span class="string">"基金编号(此值唯一)"</span>].to_list()[<span class="number">0</span>:<span class="number">200</span>]</span><br><span class="line">BondCodeList = BondFrame[<span class="string">"基金编号(此值唯一)"</span>].to_list()[<span class="number">0</span>:<span class="number">200</span>]</span><br><span class="line">CurrCodeList = CurrFrame[<span class="string">"基金编号(此值唯一)"</span>].to_list()[<span class="number">0</span>:<span class="number">200</span>]</span><br><span class="line">FundCodeList = [StockCodeList,AllocCodeList,BondCodeList,CurrCodeList]</span><br><span class="line"></span><br><span class="line">TypeCategory = [<span class="string">"C1"</span>,<span class="string">"C3"</span>,<span class="string">"C2"</span>,<span class="string">"C5"</span>,<span class="string">"C4"</span>]</span><br><span class="line">SexCategory = [<span class="string">"男"</span>,<span class="string">"女"</span>]</span><br><span class="line">FundCategory = [<span class="string">"股票型"</span>,<span class="string">"混合型"</span>,<span class="string">"债券型"</span>,<span class="string">"货币型"</span>]</span><br><span class="line">WayCategory = [<span class="string">"认购"</span>,<span class="string">"申购"</span>,<span class="string">"定投"</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">UserList = []</span><br><span class="line">AgeList = []</span><br><span class="line">SexList = []</span><br><span class="line">RegisterList = []</span><br><span class="line">RemainList = []</span><br><span class="line">TypeList = []</span><br><span class="line">BuyList = []</span><br><span class="line">CategoryList = []</span><br><span class="line">WayList = []</span><br><span class="line">TimeList = []</span><br><span class="line">MoneyList = []</span><br><span class="line">ChargeList = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> UserCode <span class="keyword">in</span> range(UserNum):  <span class="comment">#UserNum</span></span><br><span class="line">    weight = random.randint(<span class="number">1</span>,<span class="number">100</span>)  <span class="comment"># 随机权重</span></span><br><span class="line">    InvestNum = <span class="number">1</span> </span><br><span class="line">    weightlist = [sum(TypeWeightList[<span class="number">0</span>:i+<span class="number">1</span>]) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>)]</span><br><span class="line">    Type = WeightRand(weightlist)</span><br><span class="line">    InvestNum = random.randint(FrequencyStartList[Type],FrequencyEndList[Type])</span><br><span class="line">    weightlist = [SexWeightList[Type],<span class="number">100</span>]</span><br><span class="line">    Sex = WeightRand(weightlist)</span><br><span class="line">    Age = random.randint(AgeStartList[Type],AgeEndList[Type])</span><br><span class="line">    Remain = random.randint(RemainStartList[Type],RemainEndList[Type])</span><br><span class="line">    Register = random.randint(RegisterStartList[Type],RegisterEndList[Type])</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range (<span class="number">1</span>,InvestNum+<span class="number">1</span>):</span><br><span class="line">        UserList.append(UserCode)</span><br><span class="line">        AgeList.append(Age)</span><br><span class="line">        SexList.append(SexCategory[Sex])</span><br><span class="line">        RegisterList.append(Register)</span><br><span class="line">        RemainList.append(Remain)</span><br><span class="line">        TypeList.append(TypeCategory[Type])</span><br><span class="line">        <span class="comment"># 手续费</span></span><br><span class="line">        Charge = random.randint(ChargeStartList[Type],ChargeEndList[Type])</span><br><span class="line">        ChargeList.append(Charge)</span><br><span class="line">        <span class="comment"># 随机基金种类</span></span><br><span class="line">        weightlist=[]</span><br><span class="line">        ans=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range (<span class="number">4</span>):</span><br><span class="line">            ans = ans + FundWeightList[j][Type]</span><br><span class="line">            weightlist.append(ans)</span><br><span class="line">        CategoryIndex = WeightRand(weightlist)</span><br><span class="line">        <span class="keyword">if</span> CategoryIndex == <span class="number">-1</span>:</span><br><span class="line">            CategoryList.append(<span class="string">"其他"</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            CategoryList.append(FundCategory[CategoryIndex])</span><br><span class="line">        index = random.randint(<span class="number">0</span>,len(FundCodeList[CategoryIndex])<span class="number">-1</span>)    </span><br><span class="line">        FundCode =  FundCodeList[CategoryIndex][index]</span><br><span class="line">        BuyList.append(FundCode)</span><br><span class="line">        <span class="comment"># 随机时间</span></span><br><span class="line">        t=random.randint(start,end)    </span><br><span class="line">        date_touple=time.localtime(t)          </span><br><span class="line">        date=time.strftime(<span class="string">"%Y-%m-%d"</span>,date_touple)</span><br><span class="line">        TimeList.append(str(date))</span><br><span class="line">        <span class="comment"># 随机投资金额</span></span><br><span class="line">        Money = random.randint(InvestStartList[Type],InvestEndList[Type])</span><br><span class="line">        MoneyList.append(Money)</span><br><span class="line">        <span class="comment"># 投资方式</span></span><br><span class="line">        weightlist = []</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range (<span class="number">3</span>):</span><br><span class="line">            ans = ans + WayWeightList[j][Type]</span><br><span class="line">            weightlist.append(ans)</span><br><span class="line">        index = WeightRand(weightlist)</span><br><span class="line">        <span class="keyword">if</span> index == <span class="number">-1</span>:</span><br><span class="line">            WayList.append(<span class="string">"其他"</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            WayList.append(WayCategory[index])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">TrainData = pd.DataFrame(&#123;<span class="string">"用户编码"</span>:UserList,<span class="string">"用户类型"</span>:TypeList,<span class="string">"性别"</span>:SexList,<span class="string">"开户时长"</span>:RegisterList,<span class="string">"帐户余额"</span>:RemainList,<span class="string">"年龄"</span>:AgeList,<span class="string">"基金代码"</span>:BuyList,<span class="string">"基金类型"</span>:CategoryList,<span class="string">"投资时间"</span>:TimeList,<span class="string">"投资金额"</span>:MoneyList,<span class="string">"投资方式"</span>:WayList,<span class="string">"手续费"</span>:ChargeList&#125;)</span><br><span class="line">TrainData.to_csv(<span class="string">"TrainData.csv"</span>,encoding=<span class="string">"utf_8_sig"</span>,index=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="欢乐的定模型时间"><a href="#欢乐的定模型时间" class="headerlink" title="欢乐的定模型时间"></a>欢乐的定模型时间</h1><p>按金工同学这个架势，估计定模型要定一万年，于是我以迅雷不及掩耳盗铃儿响叮当之势喊了一嗓子“先写着，优化问题再说”</p>
+<p>于是就变成了 数据集-&gt;聚类-&gt;基于聚类的SVDPP 这么一套诡异的逻辑，当时我就觉得不太对，问他们为啥要聚类，他们好像还以看待问题少年一般的看我，解释说是因为原数据量太大，我TM还接受了</p>
+<p>现在想想真是TMD ZZ，你聚类就好好聚类，SVDpp就SVDpp，这两玩意加一起又不是1+1=2，说不定是1-1=0…</p>
+<p>女子口巴，我领着我的任务欢乐的走了</p>
+<h2 id="评分模型"><a href="#评分模型" class="headerlink" title="评分模型"></a>评分模型</h2><p>好在我们组的金工同学还算良心，把评分模型给了咱：</p>
+<p>评分模型：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Point = (Invest/InvestSum)*math.log((<span class="number">1</span>+t/MaxTime),<span class="number">2</span>)+<span class="number">1</span></span><br></pre></td></tr></table></figure></p>
+<p>整体代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createPoint</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 读入分类集</span></span><br><span class="line">    RawData = pd.read_csv(<span class="string">"用户记录.csv"</span>,encoding=<span class="string">'gbk'</span>)</span><br><span class="line">    TypeFrame = pd.DataFrame(RawData.客户类别,index = RawData.客户编号)</span><br><span class="line">    <span class="comment"># 读入交易集</span></span><br><span class="line">    TradeFrame = pd.read_csv(<span class="string">'交易记录.csv'</span>,encoding=<span class="string">'gbk'</span>)</span><br><span class="line"></span><br><span class="line">    UserList = TradeFrame.客户编号.unique()</span><br><span class="line">    FundList = TradeFrame.基金编号.unique()</span><br><span class="line">    <span class="comment"># 计算中用户/商品数量</span></span><br><span class="line">    FundNum = len(FundList)</span><br><span class="line">    UserNum = len(UserList)</span><br><span class="line">    print(<span class="string">"用户数量:%d 商品数量:%d"</span> % (UserNum,FundNum))</span><br><span class="line">    <span class="comment"># 初始化评分矩阵</span></span><br><span class="line">    PointUserList = []</span><br><span class="line">    PointList = []</span><br><span class="line">    PointFundList = []</span><br><span class="line">    PointTypeList = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(UserNum):</span><br><span class="line">        <span class="comment"># 进度条</span></span><br><span class="line">        progress = int(i*<span class="number">100</span>/UserNum)</span><br><span class="line">        progerss_str = (<span class="string">'#'</span>*progress)+<span class="string">"(&#123;&#125;%/100%)"</span>.format(progress)</span><br><span class="line">        print(<span class="string">"\rCreate Point Progress:&#123;:&lt;120&#125;"</span>.format(progerss_str),end=<span class="string">""</span>)</span><br><span class="line">        <span class="comment"># 获取用户类型</span></span><br><span class="line">        Type = TypeFrame.loc[UserList[i]].客户类别</span><br><span class="line">        <span class="comment"># 框选用户数据</span></span><br><span class="line">        UserData = TradeFrame.ix[TradeFrame.客户编号 == UserList[i]]</span><br><span class="line">        <span class="comment"># 获得其投资总额</span></span><br><span class="line">        InvestSum = sum(UserData.交易金额)</span><br><span class="line">        <span class="comment"># 获得其最晚活跃时间</span></span><br><span class="line">        TimeList = []</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> UserData.交易时间:</span><br><span class="line">            TimeList.append(time.mktime(time.strptime(x,<span class="string">'%Y-%m-%d  %H:%M:%S'</span>)))</span><br><span class="line">        MaxTime = np.max(TimeList)</span><br><span class="line">        <span class="comment"># 框选其投资数据，计算评分要素</span></span><br><span class="line">        <span class="keyword">for</span> FundCode <span class="keyword">in</span> UserData.基金编号.unique():</span><br><span class="line">            InvestData = UserData.ix[UserData.基金编号 == FundCode]</span><br><span class="line">            Invest = sum(InvestData.交易金额)</span><br><span class="line">            t = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> x <span class="keyword">in</span> InvestData.交易时间:</span><br><span class="line">                tx = time.mktime(time.strptime(x,<span class="string">'%Y-%m-%d  %H:%M:%S'</span>))</span><br><span class="line">                <span class="keyword">if</span> tx &gt;= t:</span><br><span class="line">                    t = tx</span><br><span class="line">            <span class="comment"># 论文中给出的评分模型</span></span><br><span class="line">            Point = (Invest/InvestSum)*math.log((<span class="number">1</span>+t/MaxTime),<span class="number">2</span>)+<span class="number">1</span></span><br><span class="line">            PointFundList.append(FundCode)</span><br><span class="line">            PointUserList.append(UserList[i])</span><br><span class="line">            PointList.append(Point)</span><br><span class="line">            PointTypeList.append(Type)</span><br><span class="line">    PointCSV = pd.DataFrame(&#123;<span class="string">"User"</span>:PointUserList,<span class="string">"FundCode"</span>:PointFundList,<span class="string">"Point"</span>:PointList,<span class="string">"Type"</span>:PointTypeList&#125;)</span><br><span class="line">    PointCSV.to_csv(<span class="string">'Point.csv'</span>,index=<span class="literal">False</span>)</span><br><span class="line">    print(<span class="string">"PointCSV Created"</span>)</span><br><span class="line">    <span class="keyword">return</span> PointCSV</span><br></pre></td></tr></table></figure>
+<h2 id="SVDpp协同过滤算法"><a href="#SVDpp协同过滤算法" class="headerlink" title="SVDpp协同过滤算法"></a>SVDpp协同过滤算法</h2><p>本来呢，是说什么基于最近的k个用户打分来搞，搞着搞着我愈发觉得不是很对，这种拍脑袋想出来的真的准确度高吗（最恐怖的是我们无法评判准确度，因为整个数据集都是基于比例随机的= =）</p>
+<p>最关键的一点是：我总想调个库玩玩</p>
+<p>于是在网上搜了半天，看到了一个基于sklearn库实现SVD的文章，代码长这样</p>
+<p>若有侵权请告知，我将立即删除</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取u.data文件</span></span><br><span class="line">header = [<span class="string">'user_id'</span>, <span class="string">'item_id'</span>, <span class="string">'rating'</span>, <span class="string">'timestamp'</span>]</span><br><span class="line">df = pd.read_csv(<span class="string">'ml-100k/u.data'</span>, sep=<span class="string">'\t'</span>, names=header)</span><br><span class="line"><span class="comment"># 计算唯一用户和电影的数量</span></span><br><span class="line">n_users = df.user_id.unique().shape[<span class="number">0</span>]</span><br><span class="line">n_items = df.item_id.unique().shape[<span class="number">0</span>]</span><br><span class="line">print(<span class="string">'Number of users = '</span> + str(n_users) + <span class="string">' | Number of movies = '</span> + str(n_items))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用scikit-learn库将数据集分割成测试和训练。Cross_validation.train_test_split根据测试样本的比例（test_size），本例中是0.25，来将数据混洗并分割成两个数据集</span></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> model_selection <span class="keyword">as</span> ms</span><br><span class="line">train_data, test_data = ms.train_test_split(df, test_size=<span class="number">0.25</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算数据集的稀疏度</span></span><br><span class="line">sparsity = round(<span class="number">1.0</span> - len(df)/float(n_users*n_items), <span class="number">3</span>)</span><br><span class="line">print(<span class="string">'The sparsity level of MovieLens100K is '</span> + str(sparsity*<span class="number">100</span>) + <span class="string">'%'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建uesr-item矩阵，此处需创建训练和测试两个UI矩阵</span></span><br><span class="line">train_data_matrix = np.zeros((n_users, n_items))</span><br><span class="line"><span class="comment"># 遍历train_data的每一行来生成训练用评分</span></span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> train_data.itertuples():</span><br><span class="line">    train_data_matrix[line[<span class="number">1</span>] - <span class="number">1</span>, line[<span class="number">2</span>] - <span class="number">1</span>] = line[<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">test_data_matrix = np.zeros((n_users, n_items))</span><br><span class="line"><span class="keyword">for</span> line <span class="keyword">in</span> test_data.itertuples():</span><br><span class="line">    test_data_matrix[line[<span class="number">1</span>] - <span class="number">1</span>, line[<span class="number">2</span>] - <span class="number">1</span>] = line[<span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用SVD进行矩阵分解</span></span><br><span class="line"><span class="keyword">import</span> scipy.sparse <span class="keyword">as</span> sp</span><br><span class="line"><span class="keyword">from</span> scipy.sparse.linalg <span class="keyword">import</span> svds</span><br><span class="line"></span><br><span class="line">u, s, vt = svds(train_data_matrix, k=<span class="number">20</span>)</span><br><span class="line">s_diag_matrix = np.diag(s)</span><br><span class="line">X_pred = np.dot(np.dot(u, s_diag_matrix), vt)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 利用均方根误差进行评估</span></span><br><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> mean_squared_error</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rmse</span><span class="params">(prediction, ground_truth)</span>:</span></span><br><span class="line">    print(prediction[ground_truth.nonzero()].shape[<span class="number">0</span>])</span><br><span class="line">    print(ground_truth[ground_truth.nonzero()].shape[<span class="number">0</span>])</span><br><span class="line">    prediction = prediction[ground_truth.nonzero()].flatten()</span><br><span class="line">    ground_truth = ground_truth[ground_truth.nonzero()].flatten()</span><br><span class="line">    <span class="keyword">return</span> sqrt(mean_squared_error(prediction, ground_truth))</span><br><span class="line"></span><br><span class="line">print(<span class="string">'User-based CF MSE: '</span> + str(rmse(X_pred, test_data_matrix)))</span><br></pre></td></tr></table></figure>
+<p>一开始还觉得蛮好的，后来越想越觉得不对，这玩意压根就没有机器学习的影子嘛，而且<code>svds</code>也不是从<code>sklearn</code>库里调出来的,这只是个矩阵分解而已，亏我还以为我已经写完了，于是赶紧上google查一查sklearn库里有没有推荐算法的模型，还真没有！</p>
+<h3 id="surprise库"><a href="#surprise库" class="headerlink" title="surprise库"></a>surprise库</h3><p>于是抛弃<code>sklearn</code>库，权衡之下选择了<code>surprise</code>库,他的官网：<a href="http://surpriselib.com/" target="_blank" rel="noopener">http://surpriselib.com/</a></p>
+<p>推荐算法列表（部分）如下：</p>
+<p><img src="https://raw.githubusercontent.com/LDawns/reward/master/Suprise.png" alt="avatar"></p>
+<p>急忙查了一下，觉得SVDpp的高扩展性和高准确度是最适合咱的，于是去看文档，研究了半天，终于搞明白了，他有自己的一套dataset,trainset,有些算法（大部分评估算法）只能在dataset上运行，有些（大部分推荐算法）只能在trainset上运行，SVDpp就是在trainset上运行的算法</p>
+<h3 id="将数据转为dataset-trainset"><a href="#将数据转为dataset-trainset" class="headerlink" title="将数据转为dataset,trainset"></a>将数据转为dataset,trainset</h3><p>这里我只说明如何读取csv文件，并将它转为dataset</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> surprise <span class="keyword">import</span> Dataset</span><br><span class="line"><span class="keyword">from</span> surprise <span class="keyword">import</span> Reader</span><br><span class="line"></span><br><span class="line">Frame =  pd.read_csv(<span class="string">"xxx.csv"</span>,encoding=<span class="string">"xxx"</span>)</span><br><span class="line">Frame = Frame.loc[:,<span class="string">'User'</span>:<span class="string">'Point'</span>] </span><br><span class="line"><span class="comment"># Frame现在只包含User FundCode Point 三个属性，建议按序排列</span></span><br><span class="line">reader = Reader(rating_scale=(<span class="number">0</span>,<span class="number">2</span>))</span><br><span class="line">dataset = Dataset.load_from_df(Frame, reader=reader) </span><br><span class="line">trainset = dataset.build_full_trainset()</span><br></pre></td></tr></table></figure>
+<h3 id="训练，预测，保存"><a href="#训练，预测，保存" class="headerlink" title="训练，预测，保存"></a>训练，预测，保存</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> surprise <span class="keyword">import</span> dump</span><br><span class="line"><span class="comment"># 训练</span></span><br><span class="line">model.fit(trainset)</span><br><span class="line"><span class="comment"># 预测</span></span><br><span class="line"><span class="comment"># surprise有iid（item id），uid（user id）之说</span></span><br><span class="line"><span class="comment"># iid/uid又分为内id与外id，内id就是算法运行时内部重编码的id，外id是你给他的id</span></span><br><span class="line"><span class="comment"># surprise内有函数可与将内id与外id相互转换</span></span><br><span class="line"><span class="comment"># 不同的预测算法对输入的要求不一样，这里是外id （uid,iid）</span></span><br><span class="line"><span class="comment"># predict函数将返回prediction类，其中的est属性是预估评分</span></span><br><span class="line">model.predict(User,Fund).est</span><br><span class="line"><span class="comment"># 保存模型</span></span><br><span class="line">dump.dump(<span class="string">'model'</span>,algo=model)</span><br><span class="line"><span class="comment"># 读取模型</span></span><br><span class="line"><span class="comment"># 这里一定要两个对象，Res是prediction类，model则是算法</span></span><br><span class="line">Res,model = dump.load(<span class="string">'model'</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="高扩展性"><a href="#高扩展性" class="headerlink" title="高扩展性"></a>高扩展性</h3><p>搞了很多天都不明白为什么SVDpp有高扩展性，以后再慢慢填吧，项目也快结项了。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/推荐算法/" rel="tag"># 推荐算法</a>
+          
+            <a href="/tags/花旗杯/" rel="tag"># 花旗杯</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/09/MachineLearning/" rel="next" title="机器学习实战------项目开发经过">
+                <i class="fa fa-chevron-left"></i> 机器学习实战------项目开发经过
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/12/WebSiteMove/" rel="prev" title="网站迁移工作的教训">
+                网站迁移工作的教训 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="LDawn">
+            
+              <p class="site-author-name" itemprop="name">LDawn</p>
+              <p class="site-description motion-element" itemprop="description">不定时更新关于编程或网络攻防相关的文章</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/LDawns" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:lsm@smail.nju.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/LDawn13" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/qq_44954803" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#起步"><span class="nav-number">1.</span> <span class="nav-text">起步</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#没有数据集？凭空学，学TMD"><span class="nav-number">2.</span> <span class="nav-text">没有数据集？凭空学，学TMD</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#欢乐的定模型时间"><span class="nav-number">3.</span> <span class="nav-text">欢乐的定模型时间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#评分模型"><span class="nav-number">3.1.</span> <span class="nav-text">评分模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVDpp协同过滤算法"><span class="nav-number">3.2.</span> <span class="nav-text">SVDpp协同过滤算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#surprise库"><span class="nav-number">3.2.1.</span> <span class="nav-text">surprise库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将数据转为dataset-trainset"><span class="nav-number">3.2.2.</span> <span class="nav-text">将数据转为dataset,trainset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练，预测，保存"><span class="nav-number">3.2.3.</span> <span class="nav-text">训练，预测，保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高扩展性"><span class="nav-number">3.2.4.</span> <span class="nav-text">高扩展性</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LDawn</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
