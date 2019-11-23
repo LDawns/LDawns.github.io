@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="C++从零开始 ——— 二叉树与 轮子的故事轮子引入一个优秀的程序员拿到一个新语言的第一件事往往就是造轮子 ，没有轮子的程序就像没有轮子的汽车，怎么跑都跑不动 。大家都喜欢Python，为什么呢？因为Python全部是轮子，C++跟Python一比，就是婴儿车对战高达（就便利性来说），当然，C++优秀的性能也是不容小觑的，想象一下全副武装的C++,那就是无敌的感觉啦。 类我们一直说的轮子就是类,自">
+<meta name="keywords" content="算法,CTF,computer science,计算机网络,编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LDawn的自闭室">
+<meta property="og:url" content="http://www.lsmian.com/2019/11/23/c++_beginwith_tree/index.html">
+<meta property="og:site_name" content="LDawn的自闭室">
+<meta property="og:description" content="C++从零开始 ——— 二叉树与 轮子的故事轮子引入一个优秀的程序员拿到一个新语言的第一件事往往就是造轮子 ，没有轮子的程序就像没有轮子的汽车，怎么跑都跑不动 。大家都喜欢Python，为什么呢？因为Python全部是轮子，C++跟Python一比，就是婴儿车对战高达（就便利性来说），当然，C++优秀的性能也是不容小觑的，想象一下全副武装的C++,那就是无敌的感觉啦。 类我们一直说的轮子就是类,自">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-23T12:17:23.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LDawn的自闭室">
+<meta name="twitter:description" content="C++从零开始 ——— 二叉树与 轮子的故事轮子引入一个优秀的程序员拿到一个新语言的第一件事往往就是造轮子 ，没有轮子的程序就像没有轮子的汽车，怎么跑都跑不动 。大家都喜欢Python，为什么呢？因为Python全部是轮子，C++跟Python一比，就是婴儿车对战高达（就便利性来说），当然，C++优秀的性能也是不容小觑的，想象一下全副武装的C++,那就是无敌的感觉啦。 类我们一直说的轮子就是类,自">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.lsmian.com/2019/11/23/c++_beginwith_tree/">
+
+
+
+
+
+  <title> | LDawn的自闭室</title>
+  
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css">
+<script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget/autoload.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">LDawn的自闭室</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">一条不出货的小咸鱼</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.lsmian.com/2019/11/23/c++_beginwith_tree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="LDawn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LDawn的自闭室">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-23T20:17:23+08:00">
+                2019-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="C-从零开始-———-二叉树与-轮子的故事"><a href="#C-从零开始-———-二叉树与-轮子的故事" class="headerlink" title="C++从零开始 ——— 二叉树与 轮子的故事"></a>C++从零开始 ——— 二叉树与 轮子的故事</h1><h2 id="轮子"><a href="#轮子" class="headerlink" title="轮子"></a>轮子</h2><h3 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h3><p>一个优秀的程序员拿到一个新语言的第一件事往往就是<code>造轮子</code> ，没有轮子的程序就像没有轮子的汽车，怎么跑都跑不动 。大家都喜欢Python，为什么呢？因为Python全部是轮子，C++跟Python一比，就是婴儿车对战高达（就便利性来说），当然，C++优秀的性能也是不容小觑的，想象一下全副武装的C++,那就是无敌的感觉啦。</p>
+<h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><p>我们一直说的轮子就是<code>类</code>,自从<code>类</code>这个概念被发明以来，人类的bug就以指数级下降，毫不夸张的说，没有类就没有今天的3A大作。最简单的类就长下面这个亚子。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">myclass</span>&#123;</span></span><br><span class="line"><span class="comment">// private和publlic 是类中特有的两个关键字，新手可以全部用public</span></span><br><span class="line"><span class="comment">// private一般存储不会被外界使用的变量，只在类中使用</span></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line"><span class="comment">// public中写函数</span></span><br><span class="line">    <span class="comment">// 以类名命名的函数被称为构造函数，它将会在类被创建的时候调用</span></span><br><span class="line">    myclass()&#123;data = <span class="number">0</span>&#125;;</span><br><span class="line">    <span class="comment">// 你可以写多个构造函数，类被创建的时候会根据传入的参数调用合适的构造函数</span></span><br><span class="line">    myclass(<span class="keyword">int</span> data)&#123;<span class="keyword">this</span>-&gt;data = data&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后我们可以在main函数中这样构造一个类</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这个main请跟在上面的class底下写</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个myclass的指针a</span></span><br><span class="line">    myclass * a = <span class="keyword">new</span> myclass();   </span><br><span class="line">    myclass * b = <span class="keyword">new</span> myclass(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是最关键的，也是类能消灭诸多bug的神奇之处，它是松耦合的，也就是说你可以把它单独拿出来给另一个程序使用，他有一个好兄弟叫做<code>.h文件</code>,如果你把class单独拎出来放到一个叫<code>filename.h</code>的地方，那么你的main函数可以不紧跟着下面写，而可以写到另一个cpp里面，像这样（.h和.cpp文件请放在同一个文件夹中）</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载头文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"filename.h"</span></span></span><br><span class="line"><span class="comment">// 这个main函数写在main.cpp中</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 创建一个myclass的指针a</span></span><br><span class="line">    myclass * a = <span class="keyword">new</span> myclass();   </span><br><span class="line">    myclass * b = <span class="keyword">new</span> myclass(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以在类的概念被提出 来之后，编程行业基本上就是上github上搜一堆<code>.h文件</code>，include一下，调几个函数，一个项目就完成了，它不香吗？</p>
+<p>另外，除了类可以放在<code>.h</code>文件中，什么<code>#include&lt;iostream&gt;之类</code>的也可以放在<code>.h文件</code>中,让<code>main.cpp</code>变得更加清爽,由此衍生出来的QT项目有时候<code>mian.cpp</code>就只有一句话(当然这也应该是我们的追求)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;QT&gt;</span></span></span><br><span class="line">qt.start();</span><br></pre></td></tr></table></figure>
+<h3 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h3><p>创建一个<code>.h文件</code>，写入以下东西，直接看代码，要说的都在代码里</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="comment">// 这里节点我没有使用类，而是使用C风格的struct,与类是一样的效果 </span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span>       </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> data;     <span class="comment">// 数据</span></span><br><span class="line">    node * lnext; <span class="comment">// 左节点 这里为什么要用指针？想一想！</span></span><br><span class="line">    node * rnext; <span class="comment">// 右节点</span></span><br><span class="line">    <span class="keyword">bool</span> done;     <span class="comment">// 用于dfs判断是否访问过</span></span><br><span class="line">    node(<span class="keyword">char</span> d)   <span class="comment">// 构造函数（用来初始化一个节点）</span></span><br><span class="line">    &#123;</span><br><span class="line">        data  = d;    </span><br><span class="line">        lnext = <span class="literal">NULL</span>; <span class="comment">//NULL 是C++保留字，表示空</span></span><br><span class="line">        rnext = <span class="literal">NULL</span>;</span><br><span class="line">        done = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 一棵二叉树</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tree</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="comment">//新手最好一律public</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    node * root = <span class="literal">NULL</span>;    <span class="comment">// 树根</span></span><br><span class="line">    <span class="comment">// 构造函数，r代表树根</span></span><br><span class="line">    Tree()&#123;root = <span class="literal">NULL</span>;&#125;;</span><br><span class="line">    Tree(node * root)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;root = root; <span class="comment">// this-&gt;root 特指类中的root，root指传入参数</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// root 代表树上的某一节点（不是类中本有的变量root）， n表示新节点,isriaght 表示向左插入还是向右插入</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(node *&amp; root, node * n, <span class="keyword">bool</span> isright)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 保证节点右节点是空</span></span><br><span class="line">        <span class="keyword">if</span>(isright &amp; root-&gt;rnext == <span class="literal">NULL</span>) root -&gt;rnext =  n;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(root-&gt;lnext == <span class="literal">NULL</span>) root -&gt;lnext =n;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"insert faill!\n"</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// 输出前序遍历结果</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">outputPreoder</span><span class="params">(node * root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (root!=<span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%c "</span>,root-&gt;data);</span><br><span class="line">            outputPreoder(root-&gt;lnext);</span><br><span class="line">            outputPreoder(root-&gt;rnext);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 依据前序遍历建树,root代表根节点,i代表进行到的前序遍历数组的下标，input代表前序遍历数组</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(node *&amp; root,<span class="keyword">int</span> &amp;i,<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt; input)</span> <span class="comment">// *&amp;的意思是再次函数内所有对root的改变都将·生效·， 如果想让root的改变只在该函数内·生效·，就用*,&amp;i是一样的意思（仔细想一想为什么要&amp;i）</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(i&gt;=input.size())<span class="keyword">return</span> ;                 <span class="comment">// 已经到头</span></span><br><span class="line">        <span class="keyword">if</span>(input[i]==<span class="string">'#'</span>)                           <span class="comment">// 空节点，没必要继续</span></span><br><span class="line">        &#123;</span><br><span class="line">            i++;</span><br><span class="line">            root=<span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>									<span class="comment">// 建树</span></span><br><span class="line">        &#123;</span><br><span class="line">            root=<span class="keyword">new</span> node(input[i]);			  <span class="comment">// 每个节点都需要空间</span></span><br><span class="line">            <span class="comment">// 简单的说就是一个节点要从NULL变为一个有实际意义的节点，就必须要分配空间，即new</span></span><br><span class="line">            i++;</span><br><span class="line">            preOrder(root-&gt;lnext,i,input); <span class="comment">//递归</span></span><br><span class="line">            preOrder(root-&gt;rnext,i,input);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 这里dfs将输出每个节点的数据</span></span><br><span class="line">    <span class="comment">// 什么问题适用于dfs解决？父节点需要解决的事情依赖于子节点的解决</span></span><br><span class="line">   <span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(node *&amp; root)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root  == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">        root-&gt;done = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;lnext!=<span class="literal">NULL</span>) <span class="comment">//NULL数据是不可访问的，所以必须先判断</span></span><br><span class="line">            <span class="keyword">if</span> (!root-&gt;lnext-&gt;done) </span><br><span class="line">            &#123;</span><br><span class="line">                dfs(root-&gt;lnext);</span><br><span class="line">                <span class="comment">// <span class="doctag">TODO:</span>在这里你可以进行数据处理</span></span><br><span class="line">                <span class="comment">// 并且由于dfs的特性，左子节点的数据已经处理好</span></span><br><span class="line">                <span class="comment">// 子节点的数据可以这样获得root-&gt;lnext-&gt;data(左子节点)</span></span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">if</span> (root-&gt;rnext!=<span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">if</span>(!root-&gt;rnext-&gt;done)</span><br><span class="line">            &#123;</span><br><span class="line">                dfs(root-&gt;rnext);</span><br><span class="line">                <span class="comment">// <span class="doctag">TODO:</span>同上</span></span><br><span class="line">            &#125;</span><br><span class="line">        <span class="comment">// 经过数据处理后的data，如果进行了数据处理的话</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%c"</span>,root-&gt;data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>要想学好树，学好递归很重要，我甚至可以大胆的说，递归是程序员质检师。我大二的算法老师一句话道破天机</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">递归就是耍流氓，我不会写怎么办？递归。我相信这个函数可以做到我让他做的，一直相信，那这个函数就真的做到了。</span><br></pre></td></tr></table></figure>
+<p>学递归没有什么太好的办法，只能多写程序，多练，多想，直到想表达一件复杂的事情的时候想到递归，那基本就可以了。</p>
+<p>还有一个问题：<code>指针</code>，怎么学好指针？这个倒是有捷径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 写几个有指针的程序，然后开启单步调试，看看这些指针究竟指到哪里去了。</span><br><span class="line">2. 牢记一点：在编程里等于号永远不是等于号！它是·赋值·！！！</span><br></pre></td></tr></table></figure>
+<p>上述代码可以自行在main.cpp中include并测试，这里给出一个测试方案：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"tree.h"</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">vector</span> &lt;<span class="keyword">char</span>&gt; a = &#123;<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">'C'</span>,<span class="string">'#'</span>,<span class="string">'#'</span>,<span class="string">'D'</span>,<span class="string">'E'</span>,<span class="string">'#'</span>,<span class="string">'G'</span>,<span class="string">'#'</span>,<span class="string">'#'</span>,<span class="string">'F'</span>,<span class="string">'#'</span>,<span class="string">'#'</span>,<span class="string">'#'</span>&#125;;</span><br><span class="line">    Tree *mytree = <span class="keyword">new</span> Tree();</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    mytree-&gt;preOrder(mytree-&gt;root,i,a);</span><br><span class="line">    mytree-&gt;outputPreoder(mytree-&gt;root);</span><br><span class="line">    mytree-&gt;dfs(mytree-&gt;root);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/09/MachLanRecd/" rel="next" title="机器学习实战------项目开发经过">
+                <i class="fa fa-chevron-left"></i> 机器学习实战------项目开发经过
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="LDawn">
+            
+              <p class="site-author-name" itemprop="name">LDawn</p>
+              <p class="site-description motion-element" itemprop="description">不定时更新关于编程或网络攻防相关的文章</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/LDawns" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:lsm@smail.nju.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/LDawn13" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/qq_44954803" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-从零开始-———-二叉树与-轮子的故事"><span class="nav-number">1.</span> <span class="nav-text">C++从零开始 ——— 二叉树与 轮子的故事</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#轮子"><span class="nav-number">1.1.</span> <span class="nav-text">轮子</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引入"><span class="nav-number">1.1.1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类"><span class="nav-number">1.1.2.</span> <span class="nav-text">类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉树"><span class="nav-number">1.1.3.</span> <span class="nav-text">二叉树</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LDawn</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
